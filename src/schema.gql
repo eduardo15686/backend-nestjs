@@ -1,0 +1,86 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type User {
+  _id: ID!
+  name: String!
+  email: String!
+  status: String!
+  password: String!
+  age: Float!
+}
+
+type Product {
+  _id: ID!
+  name: String!
+  price: Float!
+  year: Float!
+  category: String!
+  user: User!
+}
+
+type LoginResponse {
+  access_token: String!
+  user: User!
+}
+
+type Query {
+  getUsers: [User!]!
+  getUserById(userId: String!): User!
+  getUserByEmail(getUserByEmail: String!): User!
+  getUsersByStatus(getUsersByStatus: UserStatus!): [User!]!
+  getProducts: [Product!]!
+  getProductById(productId: String!): Product!
+  getProductsByUser(getProductsByUser: String!): [Product!]!
+}
+
+"""Los posibles estados de un usuario"""
+enum UserStatus {
+  Activo
+  Inactivo
+  Suspendido
+}
+
+type Mutation {
+  createUser(createUser: CreateUser!): User!
+  updateUser(updateUser: UpdateUser!): User!
+  createProduct(createProduct: CreateProduct!): Product!
+  updateProduct(updateProduct: UpdateProduct!): Product!
+  login(email: String!, password: String!): LoginResponse!
+}
+
+input CreateUser {
+  name: String!
+  email: String!
+  password: String!
+  age: Float
+}
+
+input UpdateUser {
+  _id: ID!
+  name: String
+  email: String
+  status: String
+  age: Float
+}
+
+input CreateProduct {
+  name: String!
+  price: Float!
+  year: Float!
+  category: String!
+  user: String!
+}
+
+input UpdateProduct {
+  _id: ID!
+  name: String
+  price: Float
+  year: Float
+  category: String
+}
+
+type Subscription {
+  productAdded: Product!
+}
